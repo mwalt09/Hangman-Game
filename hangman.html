@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>Hangman</title>
+	<meta charset="UTF-8">
+</head>
+<body>
+
+<h1 id="gameOver"></h1>
+<p>Press any key to get started!</p>
+<p id="wins"></p>
+<p>Current Word</p>
+<p id="word"></p>
+<!-- Not sure how to get the _ _ _ for the words [Placeholder] -->
+<p>Number of Guesses Remaining</p>
+<!-- Placeholder for guessing remaining -->
+<p id="numberGuessesRemaining"></p>
+<p>Letters Already Guessed</p>
+<!-- Placholder for guessed letters -->
+<p id="letters"></p>
+
+<script type="text/javascript">
+
+//Log user guess and log as used letters
+//Step 1: User Guess
+//Step 2: G
+
+//Variables
+//==========================================================================
+
+//Player starts with 0 wins.
+var wins = 0;
+
+//Player starts with 15 guesses.
+var numberGuessesRemaining = 15;
+
+//Array for letters guessed.
+var lettersGuessed = [];
+
+//Variable to hold the index of current word.
+var wordIndex = 0;
+
+//Object storing hangman words. Possibly movie titles.
+var words = {
+	w1: ["gladiator"],
+	w2: ["braveheart"]
+};
+
+//Array of words.
+var wordsArray = [words.w1, words.w2];
+
+// console.log(wordsArray[0]);
+
+//Functions
+//============================================================================
+
+//Function to render new words.  ===THIS WORKS===
+function renderWord() {
+	//If there are any more words, render it now.
+	if (wordIndex <= (wordsArray.length-1)) {
+		document.querySelector("#word").innerHTML = wordsArray[wordIndex][0];
+	} else {
+		document.querySelector("#gameOver").innerHTML = "GAME OVER!";
+		document.querySelector("#wins").innerHTML = "You solved: " + wins + " out of 10.";
+	}
+}
+
+//Function to update wins.
+function updateWins() {
+	document.querySelector("#wins").innerHTML = "Wins: " + wins;
+}
+
+//Function to update number of remaining guesses.
+function updateGuesses() {
+	document.querySelector("#numberGuessesRemaining").innerHTML = numberGuessesRemaining;
+}
+
+//Function to display guesses letters.
+function lettersGuessed() {
+
+}
+
+//Calling the functions to start the game.
+renderWord();
+updateWins();
+
+//Function that runns when a key is pressed.
+document.onkeyup = function(event) {
+
+	if (wordIndex === wordsArray.length) {
+		return;
+	}
+
+	//Determine which key was pressed and stored to a variable for usage.
+	var userInput = String.fromCharCode(event.keyCode).toLowerCase();
+	//Pushes letters guessed to the lettersGuessed array.
+
+	function updateLettersGuessed() {
+		if (lettersGuessed.indexOf(userInput) == -1) lettersGuessed.push(userInput);
+			
+		for (var i = 0; i < lettersGuessed.length; i++) {
+			document.querySelector("#letters").innerHTML = lettersGuessed;
+		}
+	}
+	updateLettersGuessed();		
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
