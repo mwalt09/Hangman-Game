@@ -14,7 +14,7 @@
 <!-- Not sure how to get the _ _ _ for the words [Placeholder] -->
 <p>Number of Guesses Remaining</p>
 <!-- Placeholder for guessing remaining -->
-<p id="numberGuessesRemaining"></p>
+<p id="guesses"></p>
 <p>Letters Already Guessed</p>
 <!-- Placholder for guessed letters -->
 <p id="letters"></p>
@@ -32,7 +32,7 @@
 var wins = 0;
 
 //Player starts with 15 guesses.
-var numberGuessesRemaining = 15;
+var guesses = 15;
 
 //Array for letters guessed.
 var lettersGuessed = [];
@@ -57,12 +57,13 @@ var wordsArray = [words.w1, words.w2];
 //Function to render new words.  ===THIS WORKS===
 function renderWord() {
 	//If there are any more words, render it now.
-	if (wordIndex <= (wordsArray.length-1)) {
+	if (wordIndex <= (wordsArray.length-1) || (guesses === 0)) {
 		document.querySelector("#word").innerHTML = wordsArray[wordIndex][0];
-	} else {
-		document.querySelector("#gameOver").innerHTML = "GAME OVER!";
-		document.querySelector("#wins").innerHTML = "You solved: " + wins + " out of 10.";
 	}
+	// } else {
+	// 	document.querySelector("#gameOver").innerHTML = "GAME OVER!";
+	// 	document.querySelector("#wins").innerHTML = "You solved: " + wins + " out of 10.";
+	// }
 }
 
 //Function to update wins.
@@ -72,17 +73,13 @@ function updateWins() {
 
 //Function to update number of remaining guesses.
 function updateGuesses() {
-	document.querySelector("#numberGuessesRemaining").innerHTML = numberGuessesRemaining;
-}
-
-//Function to display guesses letters.
-function lettersGuessed() {
-
+	document.querySelector("#guesses").innerHTML = guesses;
 }
 
 //Calling the functions to start the game.
 renderWord();
 updateWins();
+updateGuesses();
 
 //Function that runns when a key is pressed.
 document.onkeyup = function(event) {
@@ -93,16 +90,28 @@ document.onkeyup = function(event) {
 
 	//Determine which key was pressed and stored to a variable for usage.
 	var userInput = String.fromCharCode(event.keyCode).toLowerCase();
+	
 	//Pushes letters guessed to the lettersGuessed array.
-
 	function updateLettersGuessed() {
+		//if statement determines if the userInput has been added to the lettersGuessed array,
+		//if not in the array, the userInput is pushed to the array.
 		if (lettersGuessed.indexOf(userInput) == -1) lettersGuessed.push(userInput);
-			
+		//Guess is subtracted from the remaining guesses.
+		guesses--;	
+		//Adds the lettersGuessed array to html.
 		for (var i = 0; i < lettersGuessed.length; i++) {
 			document.querySelector("#letters").innerHTML = lettersGuessed;
 		}
 	}
-	updateLettersGuessed();		
+	//calls the function.
+	updateLettersGuessed();	
+	updateGuesses();	
+
+
+		if (wordIndex > (wordsArray.length-1) || (guesses === 0)) {
+			document.querySelector("#gameOver").innerHTML = "GAME OVER!";
+			document.querySelector("#wins").innerHTML = "You solved: " + wins + " out of 10.";
+		}
 }
 
 
