@@ -3,224 +3,47 @@
 <head>
 	<title>Hangman</title>
 	<meta charset="UTF-8">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
 
-<h1 id="gameOver"></h1>
-<p>Press any key to get started!</p>
-<p id="wins"></p>
-<p>Current Word</p>
-<p id="word"></p>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header text-center">
+				<h1>LETS PLAY HANGMAN</h1>
+			</div>
+		</div>
+	</div>
 
-<div id="gamePage">
-	<div id="wordwrap">
-		<div id="underline1">
-			<div id="letter1"></div>
+	<div class="row">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<div class="text-center">
+				<h3 id="gameOver"></h3>
+				<p>Press any key to get started!</p>
+				<p id="wins"></p>
+				<p>Current Word</p>
+
+				<p id="currentWord"></p>
+
+				<p>Number of Guesses Remaining</p>
+				<p id="guesses"></p>
+				<p>Letters Already Guessed</p>
+				<p id="letters"></p>
+			</div>
 		</div>
-		<div id="underline2">
-			<div id="letter2"></div>
-		</div>
-		<div id="underline3">
-			<div id="letter3"></div>
-		</div>
-		<div id="underline4">
-			<div id="letter4"></div>
-		</div>
-		<div id="underline5">
-			<div id="letter5"></div>
-		</div>
-		<div id="underline6">
-			<div id="letter6"></div>
-		</div>
-		<div id="underline7">
-			<div id="letter7"></div>
-		</div>
-		<div id="underline8">
-			<div id="letter8"></div>
-		</div>
-		<div id="underline9">
-			<div id="letter9"></div>
-		</div>
-		<div id="underline10">
-			<div id="letter10"></div>
-		</div>
-		<div id="underline11">
-			<div id="letter11"></div>
-		</div>
-		<div id="underline12">
-			<div id="letter12"></div>
-		</div>
-		<div id="underline13">
-			<div id="letter13"></div>
-		</div>
-		<div id="underline14">
-			<div id="letter1"></div>
-		</div>
-		<div id="underline15">
-			<div id="letter15"></div>
-		</div>
-		<div id="underline16">
-			<div id="letter16"></div>
-		</div>
-		<div id="underline17">
-			<div id="letter17"></div>
-		</div>
-		<div id="underline18">
-			<div id="letter18"></div>
-		</div>
-		<div id="underline19">
-			<div id="letter19"></div>
-		</div>
-		<div id="underline20">
-			<div id="letter20"></div>
-		</div>
-		<div id="underline21">
-			<div id="letter21"></div>
-		</div>
-		<div id="underline22">
-			<div id="letter22"></div>
-		</div>
-		<div id="underline23">
-			<div id="letter23"></div>
-		</div>
-		<div id="underline24">
-			<div id="letter24"></div>
-		</div>
-		<div id="underline25">
-			<div id="letter25"></div>
-		</div>
+		<div class="col-md-4"></div>
 	</div>
 </div>
 
-<p>Number of Guesses Remaining</p>
-<p id="guesses"></p>
-<p>Letters Already Guessed</p>
-<p id="letters"></p>
 
-<script type="text/javascript">
 
-//
 
-//Variables
-//==========================================================================
-
-//Player starts with 0 wins.
-var wins = 0;
-
-//Player starts with 15 guesses.
-var guesses = 15;
-
-//Array for letters guessed.
-var lettersGuessed = [];
-
-//Variable to hold the index of current word.
-var wordIndex = 0;
-
-//Array storing hangman words. Possibly movie titles.
-var words = ["the hangover", "ip man", "collateral", "superbad", "the bourne identity", "knocked up", "there will be blood", "a history of violence", "kung fu panda"];
-
-var display = " ";
-
-var phraseLength = 0;
-
-var active = true;
-
-//Functions
-//============================================================================
-
-//Function to render new words.  ===THIS WORKS===
-function movies () {
-	var random = Math.floor(Math.random() * words.length);
-	display = words[random];
-	// if (wordIndex <= (words.length-1) || (guesses === 0)) {
-	// 	document.querySelector("#word").innerHTML = display;
-	// }
-	console.log(display);
-}
-
-function displayWord () {
-	var x = display.length;
-	var y = x-1;
-	var spaces = 0;
-	while (x>0) {
-		var letter = display.substring(y,x);
-		console.log(letter);
-		if (letter === " ") {
-			document.getElementById('letter'+x).innerHTML = "&nbsp;";
-			document.getElementById('letter'+x).style.visibility = "hidden";
-			document.getElementById('letter'+x).style.display = "block";
-			document.getElementById('underline'+x).style.display = "block";
-			spaces++;
-		} else {
-			document.getElementById('letter'+x).innerHTML = letter;
-			document.getElementById('letter'+x).style.visibility = "hidden";
-			document.getElementById('underline'+x).style.display = "block";
-			document.getElementById('underline'+x).style.borderBottom = "3px solid black";
-		}
-		x--;
-		y--;
-		
-	}
-	phraseLength = display.length - spaces;
-}
-
-//Function to update wins.
-function updateWins() {
-	document.querySelector("#wins").innerHTML = "Wins: " + wins;
-}
-
-//Function to update number of remaining guesses.
-function updateGuesses() {
-	document.querySelector("#guesses").innerHTML = guesses;
-}
-
-//Calling the functions to start the game.
-movies ();
-displayWord();
-updateWins();
-updateGuesses();
-
-//Function that runns when a key is pressed.
-document.onkeyup = function(event) {
-
-	// if (wordIndex === wordsArray.length) {
-	// 	return;
-	// }
-
-	//Determine which key was pressed and stored to a variable for usage.
-	var userInput = String.fromCharCode(event.keyCode).toLowerCase();
-	
-	//Pushes letters guessed to the lettersGuessed array.
-	function updateLettersGuessed() {
-		//if statement determines if the userInput has been added to the lettersGuessed array,
-		//if not in the array, the userInput is pushed to the array.
-		if (lettersGuessed.indexOf(userInput) == -1) {
-			lettersGuessed.push(userInput);
-			//Guess is subtracted from the remaining guesses. If an item isn't pushed, guesses aren't subtracted from your total.
-			guesses--;	
-		} 
-		
-
-		//Adds the lettersGuessed array to html.
-		for (var i = 0; i < lettersGuessed.length; i++) {
-			document.querySelector("#letters").innerHTML = lettersGuessed;
-		}
-		if (wordIndex > (words.length-1) || (guesses === 0)) {
-			document.querySelector("#gameOver").innerHTML = "GAME OVER!";
-			document.querySelector("#wins").innerHTML = "You solved: " + wins + " out of 10.";
-			return;
-		}
-
-	}
-		
-		//calls the function.
-		updateLettersGuessed();	
-		updateGuesses();
-
-		
-}
-
-</script>
+<!-- JavaScript -->
+<script type="text/javascript" src="assets/javascript/game.js"></script>
 
 </body>
 </html>
