@@ -24,7 +24,7 @@ var inProgress = [];
 randomizer();
 
 // Functions
-// ====================================================
+// ===========================================================
 
 function randomizer() {
 	var random = Math.floor(Math.random() * words.length);
