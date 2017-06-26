@@ -5,27 +5,34 @@ var wins = 0;
 var guesses = 12;
 var maxGuesses = guesses;
 var lettersGuessed = [];
-var display = "";
 var phraseLength = 0;
 var active = true;
 var wordsIndex = 0;
-var words = [
+var wordBank = [
 	"alien",
 	"dean",
 	"cars",
 	"jackie",
 	"sing",
-	"paterson"
+	"paterson",
+	"arrival",
+	"zootopia",
+	"moonlight",
+	"la la land",
+	"rogue one: a star wars story"
 ];
+var word = "";
+var display = "";
 var state ="start";
 var inProgress = [];
 
 // var placeholder = document.getElementById("place");
-randomizer();
+// randomizer();
 
 // Functions
 // ===========================================================
 
+<<<<<<< HEAD
 function randomizer() {
 	var random = Math.floor(Math.random() * words.length);
 	display = words[random];
@@ -40,7 +47,32 @@ function randomizer() {
 	// console.log(inProgress);
 	document.getElementById("currentWord").innerHTML = inProgress;
 	// var html = "";	
+=======
+function getWord() {
+	var index = Math.floor(Math.random() * wordBank.length);
+	word = wordBank[index];
+	display = word.replace(/[a-z,A-Z]/g, "_");
+	document.getElementById("display").innerHTML = display;
+	console.log(word);
+>>>>>>> master
 }
+
+getWord();
+
+// function randomizer() {
+// 	var random = Math.floor(Math.random() * words.length);
+// 	display = words[random];
+	
+// 	for (var i = 0; i < display.length; i++) {
+// 		inProgress.push("_");
+// 	}
+// 	// var blankCounter = inProgress.length;
+// 	// console.log("test" +blankCounter);
+// 	// console.log(display);
+// 	// console.log(inProgress);
+// 	document.getElementById("currentWord").innerHTML = inProgress;
+// 	// var html = "";	
+// }
 
 function spaceCounter() {
 	var blankCounter = display.length;
@@ -80,11 +112,21 @@ document.onkeyup = function(event) {
 	var userInput = String.fromCharCode(event.keyCode).toLowerCase();
 
 		document.getElementById("gameOver").innerHTML = "";
-	
+		
+		var userInput = String.fromCharCode(event.keyCode).toLowerCase();
 
-		var theIndex = display.indexOf(userInput);
-		inProgress[theIndex] = userInput;
-		document.getElementById("currentWord").innerHTML = inProgress;
+		for (var i = 0; i < word.length; i++) {
+			var firstChar = word[i].indexOf(userInput);
+			if (firstChar !== -1) {
+				// alert("yes " + i);
+				display = display.slice(0, i) + userInput + display.slice(i + 1);
+				document.getElementById("display").innerHTML = display;
+		}
+	}
+
+		// var theIndex = display.indexOf(userInput);
+		// inProgress[theIndex] = userInput;
+		// document.getElementById("currentWord").innerHTML = inProgress;
 
 	function updateLettersGuessed() {
 		if (display.indexOf(userInput) === -1) {
