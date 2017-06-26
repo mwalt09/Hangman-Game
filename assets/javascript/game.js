@@ -25,6 +25,7 @@ var word = "";
 var display = "";
 var state ="start";
 var inProgress = [];
+var isWin = false;
 
 // Functions
 // ===========================================================
@@ -52,13 +53,25 @@ function updateGuesses() {
 	document.getElementById("guesses").innerHTML = guesses;
 }
 
+function countUnderscore() {
+	for (var i=0; i < display.length; i++) {
+		if (display[i] === "_") {
+			return;
+		}
+		else {
+			isWin = true;
+			wins++;
+		}
+	}
+}
+console.log(isWin);
+
 function resetRound() {
 	guesses = maxGuesses;
 	lettersGuessed = [];
 	document.getElementById("letters").innerHTML = "";
-	inProgress = [];
-	document.getElementById("currentWord").innerHTML = "";
-	randomizer();
+	document.getElementById("display").innerHTML = "";
+	getWord();
 }
 
 
@@ -82,7 +95,6 @@ document.onkeyup = function(event) {
 		for (var i = 0; i < word.length; i++) {
 			var firstChar = word[i].indexOf(userInput);
 			if (firstChar !== -1) {
-				// alert("yes " + i);
 				display = display.slice(0, i) + userInput + display.slice(i + 1);
 				document.getElementById("display").innerHTML = display;
 		}
@@ -90,19 +102,16 @@ document.onkeyup = function(event) {
 
 	function updateLettersGuessed() {
 		if (display.indexOf(userInput) === -1) {
-		// if (lettersGuessed.indexOf(userInput) == -1) {
 			lettersGuessed.push(userInput);
 			guesses--;
-		} else {
-			blankCounter--;
-			// console.log(counter);
 		}
 
 		for (var i = 0; i < lettersGuessed.length; i++) {
 			document.getElementById("letters").innerHTML = lettersGuessed;
 		}
+		console.log(lettersGuessed);
 
-		if (blankCounter === 0) {
+		if (isWin === true) {
 			wins++;
 			document.getElementById("gameOver").innerHTML = "YOU WON";
 			document.getElementById("wins").innerHTML = "You solved: " + wins + " out of 10.";
@@ -110,7 +119,7 @@ document.onkeyup = function(event) {
 			resetRound();
 		}
 
-		if (wordsIndex > (words.length-1) || (guesses === 0)) {
+		if (guesses === 0) {
 			document.getElementById("gameOver").innerHTML = "GAME OVER!";
 			document.getElementById("wins").innerHTML = "You solved: " + wins + " out of 10.";
 		}
