@@ -26,11 +26,9 @@ var display = "";
 var state ="start";
 var inProgress = [];
 
-// var placeholder = document.getElementById("place");
-// randomizer();
-
 // Functions
 // ===========================================================
+
 function getWord() {
 	var index = Math.floor(Math.random() * wordBank.length);
 	word = wordBank[index];
