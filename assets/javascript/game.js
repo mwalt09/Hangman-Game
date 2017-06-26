@@ -53,18 +53,28 @@ function updateGuesses() {
 	document.getElementById("guesses").innerHTML = guesses;
 }
 
-function countUnderscore() {
-	for (var i=0; i < display.length; i++) {
+// function countUnderscore() {
+// 	for (var i=0; i < display.length; i++) {
+// 		if (display[i] === "_") {
+// 			return;
+// 		}
+// 		else {
+// 			isWin = true;
+// 			wins++;
+// 		}
+// 	}
+// }
+// console.log(isWin);
+
+function testForWin() {
+	for(var i=0; i<display.length; i++) {
+		var isWin = true;
 		if (display[i] === "_") {
-			return;
-		}
-		else {
-			isWin = true;
-			wins++;
+			isWin = false;
 		}
 	}
+	return isWin;
 }
-console.log(isWin);
 
 function resetRound() {
 	guesses = maxGuesses;
@@ -97,6 +107,7 @@ document.onkeyup = function(event) {
 			if (firstChar !== -1) {
 				display = display.slice(0, i) + userInput + display.slice(i + 1);
 				document.getElementById("display").innerHTML = display;
+				console.log(testForWin());
 		}
 	}
 
@@ -111,17 +122,18 @@ document.onkeyup = function(event) {
 		}
 		console.log(lettersGuessed);
 
-		if (isWin === true) {
-			wins++;
-			document.getElementById("gameOver").innerHTML = "YOU WON";
-			document.getElementById("wins").innerHTML = "You solved: " + wins + " out of 10.";
-			updateWins();
-			resetRound();
-		}
+		// if (isWin === false) {
+		// 	wins++;
+		// 	document.getElementById("gameOver").innerHTML = "YOU WON";
+		// 	document.getElementById("wins").innerHTML = "You solved: " + wins + " out of 10.";
+		// 	updateWins();
+		// 	resetRound();
+		// }
 
 		if (guesses === 0) {
 			document.getElementById("gameOver").innerHTML = "GAME OVER!";
 			document.getElementById("wins").innerHTML = "You solved: " + wins + " out of 10.";
+			resetRound();
 		}
 	}
 	updateLettersGuessed();
@@ -129,8 +141,8 @@ document.onkeyup = function(event) {
 	spaceCounter();
 	
 }
-
 };
+
 
 
 
