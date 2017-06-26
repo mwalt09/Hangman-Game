@@ -30,6 +30,7 @@ function randomizer() {
 	var random = Math.floor(Math.random() * words.length);
 	display = words[random];
 	
+	
 	for (var i = 0; i < display.length; i++) {
 		inProgress.push("_");
 	}
