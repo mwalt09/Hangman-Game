@@ -31,48 +31,15 @@ var inProgress = [];
 
 // Functions
 // ===========================================================
-
-<<<<<<< HEAD
-function randomizer() {
-	var random = Math.floor(Math.random() * words.length);
-	display = words[random];
-	
-	
-	for (var i = 0; i < display.length; i++) {
-		inProgress.push("_");
-	}
-	// var blankCounter = inProgress.length;
-	// console.log("test" +blankCounter);
-	// console.log(display);
-	// console.log(inProgress);
-	document.getElementById("currentWord").innerHTML = inProgress;
-	// var html = "";	
-=======
 function getWord() {
 	var index = Math.floor(Math.random() * wordBank.length);
 	word = wordBank[index];
 	display = word.replace(/[a-z,A-Z]/g, "_");
 	document.getElementById("display").innerHTML = display;
 	console.log(word);
->>>>>>> master
 }
 
 getWord();
-
-// function randomizer() {
-// 	var random = Math.floor(Math.random() * words.length);
-// 	display = words[random];
-	
-// 	for (var i = 0; i < display.length; i++) {
-// 		inProgress.push("_");
-// 	}
-// 	// var blankCounter = inProgress.length;
-// 	// console.log("test" +blankCounter);
-// 	// console.log(display);
-// 	// console.log(inProgress);
-// 	document.getElementById("currentWord").innerHTML = inProgress;
-// 	// var html = "";	
-// }
 
 function spaceCounter() {
 	var blankCounter = display.length;
@@ -92,7 +59,6 @@ function resetRound() {
 	lettersGuessed = [];
 	document.getElementById("letters").innerHTML = "";
 	inProgress = [];
-	// document.getElementById("gameOver").innerHTML = "";
 	document.getElementById("currentWord").innerHTML = "";
 	randomizer();
 }
@@ -123,10 +89,6 @@ document.onkeyup = function(event) {
 				document.getElementById("display").innerHTML = display;
 		}
 	}
-
-		// var theIndex = display.indexOf(userInput);
-		// inProgress[theIndex] = userInput;
-		// document.getElementById("currentWord").innerHTML = inProgress;
 
 	function updateLettersGuessed() {
 		if (display.indexOf(userInput) === -1) {
