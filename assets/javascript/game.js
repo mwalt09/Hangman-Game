@@ -26,53 +26,19 @@ var display = "";
 var state ="start";
 var inProgress = [];
 
-// var placeholder = document.getElementById("place");
-// randomizer();
-
 // Functions
 // ===========================================================
 
-<<<<<<< HEAD
-function randomizer() {
-	var random = Math.floor(Math.random() * words.length);
-	display = words[random];
-	
-	
-	for (var i = 0; i < display.length; i++) {
-		inProgress.push("_");
-	}
-	// var blankCounter = inProgress.length;
-	// console.log("test" +blankCounter);
-	// console.log(display);
-	// console.log(inProgress);
-	document.getElementById("currentWord").innerHTML = inProgress;
-	// var html = "";	
-=======
+
 function getWord() {
 	var index = Math.floor(Math.random() * wordBank.length);
 	word = wordBank[index];
 	display = word.replace(/[a-z,A-Z]/g, "_");
 	document.getElementById("display").innerHTML = display;
 	console.log(word);
->>>>>>> master
 }
 
 getWord();
-
-// function randomizer() {
-// 	var random = Math.floor(Math.random() * words.length);
-// 	display = words[random];
-	
-// 	for (var i = 0; i < display.length; i++) {
-// 		inProgress.push("_");
-// 	}
-// 	// var blankCounter = inProgress.length;
-// 	// console.log("test" +blankCounter);
-// 	// console.log(display);
-// 	// console.log(inProgress);
-// 	document.getElementById("currentWord").innerHTML = inProgress;
-// 	// var html = "";	
-// }
 
 function spaceCounter() {
 	var blankCounter = display.length;
