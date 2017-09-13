@@ -64,6 +64,29 @@ function updateGuesses() {
   document.getElementById("guesses").innerHTML = guesses;
 }
 
+// function countUnderscore() {
+// 	for (var i=0; i < display.length; i++) {
+// 		if (display[i] === "_") {
+// 			return;
+// 		}
+// 		else {
+// 			isWin = true;
+// 			wins++;
+// 		}
+// 	}
+// }
+// console.log(isWin);
+
+function testForWin() {
+	for(var i=0; i<display.length; i++) {
+		var isWin = true;
+		if (display[i] === "_") {
+			isWin = false;
+		}
+	}
+	return isWin;
+}
+
 function resetRound() {
   if (wordBank.length === 0 || guesses === 0) {
     didWin();
